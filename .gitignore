@@ -1,4 +1,3 @@
 /node_modules
 /.DS_Store
-/dist/index.js
-/dist/index.js.map
+.vscode

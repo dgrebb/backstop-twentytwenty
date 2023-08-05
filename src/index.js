@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, useRef } from 'react';
 
 const DEGREES_IN_RADIAN = 180 / Math.PI;
 
@@ -16,17 +16,19 @@ export default class TwentyTwenty extends Component {
     this.beginDrag = this.beginDrag.bind(this);
     this.endDrag = this.endDrag.bind(this);
     this.onDragMove = this.onDragMove.bind(this);
-  }
-
-  componentWillUnmount() {
-    this.endDrag();
+    this.twentyTwentyComponent = useRef();
   }
 
   componentWillReceiveProps({ newPosition }) {
     this.setState({ position: newPosition });
   }
 
+  componentWillUnmount() {
+    this.endDrag();
+  }
+
   onDragMove(e) {
+    // eslint-disable-next-line react/destructuring-assignment
     if (!this.props.isDraggingEnabled) return;
 
     let { isDragging } = this.state;
@@ -56,7 +58,7 @@ export default class TwentyTwenty extends Component {
       }
     }
 
-    const { left, width } = this.refs.component.getBoundingClientRect();
+    const { left, width } = this.twentyTwentyComponent.getBoundingClientRect();
     let position = 100 * (pageX - left) / width;
     position = Math.max(Math.min(position, 100), 0);
     this.setState({ position, isDragging });
@@ -96,7 +98,6 @@ export default class TwentyTwenty extends Component {
       rightHorizontalAlign,
     } = this.props;
 
-
     if (children.length !== 2 && children.length !== 3) {
       console.warn('Expected exactly two or three children'); // eslint-disable-line
       return null;
@@ -104,7 +105,7 @@ export default class TwentyTwenty extends Component {
 
     return (
       <div
-        ref="component"
+        ref={this.twentyTwentyComponent}
         style={{ position: 'relative', overflow: 'hidden', whiteSpace: 'nowrap' }}
         onMouseDown={this.beginDrag}
         onTouchStart={this.beginDrag}
@@ -164,17 +165,6 @@ export default class TwentyTwenty extends Component {
     );
   }
 }
-
-TwentyTwenty.propTypes = {
-  children: PropTypes.array,
-  verticalAlign: PropTypes.string,
-  leftHorizontalAlign: PropTypes.string,
-  rightHorizontalAlign: PropTypes.string,
-  minDistanceToBeginInteraction: PropTypes.number,
-  maxAngleToBeginInteraction: PropTypes.number,
-  initialPosition: PropTypes.number,
-  isDraggingEnabled: PropTypes.bool,
-};
 
 TwentyTwenty.defaultProps = {
   verticalAlign: 'middle',

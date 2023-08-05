@@ -1,24 +1,23 @@
+const path = require('path');
+
 module.exports = {
-  context: __dirname,
   entry: './demo/index',
-  devtool: 'source-map',
   output: {
-    path: 'dist',
     filename: 'index.js',
-    library: 'twentyTwentyDemo',
-    libraryTarget: 'umd',
-    publicPath: '/dist',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
     ],
   },
-  devServer: {
-    host: '0.0.0.0',
-  },
-};
+}
