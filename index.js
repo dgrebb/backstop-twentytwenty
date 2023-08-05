@@ -83,7 +83,7 @@ var TwentyTwenty = /*#__PURE__*/function (_Component) {
           return;
         }
       }
-      var _this$twentyTwentyCom = this.twentyTwentyComponent.getBoundingClientRect(),
+      var _this$twentyTwentyCom = this.twentyTwentyComponent.current.getBoundingClientRect(),
         left = _this$twentyTwentyCom.left,
         width = _this$twentyTwentyCom.width;
       var position = 100 * (pageX - left) / width;

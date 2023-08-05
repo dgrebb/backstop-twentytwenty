@@ -58,7 +58,7 @@ export default class TwentyTwenty extends Component {
       }
     }
 
-    const { left, width } = this.twentyTwentyComponent.getBoundingClientRect();
+    const { left, width } = this.twentyTwentyComponent.current.getBoundingClientRect();
     let position = 100 * (pageX - left) / width;
     position = Math.max(Math.min(position, 100), 0);
     this.setState({ position, isDragging });
