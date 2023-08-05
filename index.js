@@ -37,7 +37,7 @@ var TwentyTwenty = /*#__PURE__*/function (_Component) {
     _this.beginDrag = _this.beginDrag.bind(_assertThisInitialized(_this));
     _this.endDrag = _this.endDrag.bind(_assertThisInitialized(_this));
     _this.onDragMove = _this.onDragMove.bind(_assertThisInitialized(_this));
-    _this.twentyTwentyComponent = (0, _react.useRef)();
+    _this.twentyTwentyComponent = /*#__PURE__*/(0, _react.createRef)();
     return _this;
   }
   _createClass(TwentyTwenty, [{

@@ -1,4 +1,4 @@
-import React, { Component, useRef } from 'react';
+import React, { Component, createRef } from 'react';
 
 const DEGREES_IN_RADIAN = 180 / Math.PI;
 
@@ -16,7 +16,7 @@ export default class TwentyTwenty extends Component {
     this.beginDrag = this.beginDrag.bind(this);
     this.endDrag = this.endDrag.bind(this);
     this.onDragMove = this.onDragMove.bind(this);
-    this.twentyTwentyComponent = useRef();
+    this.twentyTwentyComponent = createRef();
   }
 
   componentWillReceiveProps({ newPosition }) {
